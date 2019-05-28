@@ -1,0 +1,7 @@
+.pricingPlan {
+  display: flex;
+  justify-content: space-between;
+  padding: 100px 20px 100px 20px;
+  background-color: rgb(240, 241, 243);
+  list-style: none;
+}

@@ -1,0 +1,62 @@
+.profile {
+  box-sizing: border-box;
+  width: 430px;
+  padding: 90px 90px 100px 90px;
+  background-color: rgb(220, 242, 245);
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 250px;
+  background-color: white;
+  padding: 10px 0px 0px 0px;
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
+.name {
+}
+
+.location {
+}
+
+.stats {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  background-color: rgb(235, 245, 242);
+  list-style: none;
+}
+
+.statsItem {
+  width: 33.33333%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgb(170, 170, 211);
+}
+
+.name {
+  font-weight: 700;
+}
+
+.label {
+  display: block;
+}
+
+.quantity {
+  display: block;
+  font-weight: 700;
+}
+
+ {
+  /* Позиционирование */
+  /* Блочная модель */
+  /* Типографика */
+  /* Отображение */
+  /* Прочее */
+}
