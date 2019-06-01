@@ -5,7 +5,7 @@ import styles from './Counter.module.css';
 const Counter = ({ currentPublicationNumber, publicationsLength }) => {
   return (
     <p className={styles.counter}>
-      {currentPublicationNumber}/{publicationsLength}
+      {currentPublicationNumber + 1}/{publicationsLength}
     </p>
   );
 };
@@ -16,7 +16,7 @@ Counter.propTypes = {
 };
 
 Counter.defaultProps = {
-  currentPublicationNumber: 1,
+  currentPublicationNumber: 0,
   publicationsLength: 1,
 };
 

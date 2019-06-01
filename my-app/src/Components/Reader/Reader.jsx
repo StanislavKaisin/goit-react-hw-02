@@ -1,54 +1,81 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Publication from '../Publication/Publication';
 import Counter from '../Counter/Counter';
 import Controls from '../Controls/Controls';
 
-// import './Reader.css';
 import styles from './Reader.module.css';
 
 import publications from '../../Sources/publications.json';
 
-console.log('publications=', publications);
-
 export default class Reader extends Component {
-  props = publications;
+  constructor() {
+    super();
 
-  state = {
-    currentPublication: 1,
-    publicationsLength: this.props.length,
-  };
-
-  static propTypes = {
-    publications: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-        text: PropTypes.string.isRequired,
-      }),
-    ),
-  };
-
-  componentDidMount() {
-    console.log('this=', this);
-    console.log('this.props=', this.props);
+    this.state = {
+      currentPublicationNumber: 0,
+      publicationsLength: publications.length,
+      enableNext: true,
+      enablePrevious: false,
+    };
   }
 
+  handleIncrement = () => {
+    this.setState(prevState => {
+      const isOldestNumber =
+        prevState.currentPublicationNumber + 1 >= prevState.publicationsLength;
+
+      return {
+        currentPublicationNumber: isOldestNumber
+          ? prevState.currentPublicationNumber
+          : prevState.currentPublicationNumber + 1,
+        enableNext: !(
+          prevState.currentPublicationNumber + 2 >=
+          prevState.publicationsLength
+        ),
+        enablePrevious: true,
+      };
+    });
+  };
+
+  handleDecrement = () => {
+    this.setState(prevState => {
+      const lessThenSmallestNumber =
+        prevState.currentPublicationNumber - 1 <= 0;
+
+      return {
+        currentPublicationNumber: lessThenSmallestNumber
+          ? 0
+          : prevState.currentPublicationNumber - 1,
+        enableNext: true,
+        enablePrevious: !lessThenSmallestNumber,
+      };
+    });
+  };
+
   render() {
-    const { currentPublication, publicationsLength } = this.state;
+    const {
+      currentPublicationNumber,
+      publicationsLength,
+      enableNext,
+      enablePrevious,
+    } = this.state;
+    const publicationHeader = publications[currentPublicationNumber].title;
+    const publicationText = publications[currentPublicationNumber].text;
+
     return (
       <div className={styles.reader}>
-        <Publication />
+        <Controls
+          onNextClick={this.handleIncrement}
+          onPreviousClick={this.handleDecrement}
+          enableNext={enableNext}
+          enablePrevious={enablePrevious}
+        />
         <Counter
-          currentPublication={currentPublication}
+          currentPublicationNumber={currentPublicationNumber}
           publicationsLength={publicationsLength}
         />
-        <Controls />
+        <Publication header={publicationHeader} text={publicationText} />
       </div>
     );
   }
 }
-
-Reader.defaultProps = {
-  publications: [],
-};
