@@ -1,7 +1,9 @@
 import React from 'react';
 import Reader from '../Reader/Reader';
+import MoviePage from '../MoviePage/MoviePage';
+import Dashboard from '../Dashboard/Dashboard';
 
-import './App.css';
+// import './App.css';
 // import Profile from '../Profile/Profile';
 // import Stats from '../Stats/Stats';
 // import PricingPlan from '../PricingPlan/PricingPlan';
@@ -28,7 +30,9 @@ import './App.css';
 function App() {
   return (
     <div>
-      <Reader />
+      {/* <Reader /> */}
+      {/* <MoviePage /> */}
+      <Dashboard />
       {/* <h2> Profile component </h2> <Profile user={USER1} /> <br />
       <Profile user={USER2}> </Profile> <br />
       <h2> Stats component </h2> <Stats stats={STATS} /> <br />

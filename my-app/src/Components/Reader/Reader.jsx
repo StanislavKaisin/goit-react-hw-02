@@ -64,6 +64,7 @@ export default class Reader extends Component {
 
     return (
       <div className={styles.reader}>
+        <Publication header={publicationHeader} text={publicationText} />
         <Controls
           onNextClick={this.handleIncrement}
           onPreviousClick={this.handleDecrement}
@@ -74,7 +75,6 @@ export default class Reader extends Component {
           currentPublicationNumber={currentPublicationNumber}
           publicationsLength={publicationsLength}
         />
-        <Publication header={publicationHeader} text={publicationText} />
       </div>
     );
   }
