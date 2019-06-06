@@ -5,7 +5,7 @@ import SearchBar from '../SearchBar/SearchBar';
 
 import styles from './MoviePage.module.css';
 
-import movies from '../../Sources/movies.json';
+import movies from '../../../Sources/movies.json';
 
 import filterMovies from './filterMovies';
 

@@ -6,11 +6,13 @@ import styles from './MovieGrid.module.css';
 
 const MovieGrid = ({ movies }) => {
   return (
-    <div className={styles.movieGrid}>
-      {movies.map(movie => (
-        <MovieGridItem key={movie.id} movie={movie} />
-      ))}
-    </div>
+    movies.length > 0 && (
+      <div className={styles.movieGrid}>
+        {movies.map(movie => (
+          <MovieGridItem key={movie.id} movie={movie} />
+        ))}
+      </div>
+    )
   );
 };
 

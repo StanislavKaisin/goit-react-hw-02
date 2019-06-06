@@ -18,7 +18,6 @@ Counter.propTypes = {
 Counter.defaultProps = {
   currentPublicationNumber: 0,
   publicationsLength: 1,
-  
 };
 
 export default Counter;

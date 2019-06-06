@@ -3,27 +3,24 @@ import Publication from '../Publication/Publication';
 import Counter from '../Counter/Counter';
 import Controls from '../Controls/Controls';
 
-
 import styles from './Reader.module.css';
 
-import publications from '../../Sources/publications.json';
+import publications from '../../../Sources/publications.json';
 
 export default class Reader extends Component {
-
   constructor() {
     super();
 
     this.state = {
       currentPublicationNumber: 0,
       publicationsLength: publications.length,
-      enableNext: true,
+      enableNext: publications.length !== 1,
       enablePrevious: false,
     };
   }
 
   handleIncrement = () => {
     this.setState(prevState => {
-
       const isOldestNumber =
         prevState.currentPublicationNumber + 1 >= prevState.publicationsLength;
 
@@ -31,7 +28,10 @@ export default class Reader extends Component {
         currentPublicationNumber: isOldestNumber
           ? prevState.currentPublicationNumber
           : prevState.currentPublicationNumber + 1,
-        enableNext: prevState.currentPublicationNumber + 2>= prevState.publicationsLength?false:true,
+        enableNext: !(
+          prevState.currentPublicationNumber + 2 >=
+          prevState.publicationsLength
+        ),
         enablePrevious: true,
       };
     });
@@ -39,7 +39,6 @@ export default class Reader extends Component {
 
   handleDecrement = () => {
     this.setState(prevState => {
-
       const lessThenSmallestNumber =
         prevState.currentPublicationNumber - 1 <= 0;
 
@@ -48,30 +47,37 @@ export default class Reader extends Component {
           ? 0
           : prevState.currentPublicationNumber - 1,
         enableNext: true,
-        enablePrevious: lessThenSmallestNumber?false:true,
+        enablePrevious: !lessThenSmallestNumber,
       };
     });
   };
 
   render() {
-    const { currentPublicationNumber, publicationsLength, enableNext, enablePrevious } = this.state;
+    const {
+      currentPublicationNumber,
+      publicationsLength,
+      enableNext,
+      enablePrevious,
+    } = this.state;
     const publicationHeader = publications[currentPublicationNumber].title;
     const publicationText = publications[currentPublicationNumber].text;
- 
+
     return (
-      <div className={styles.reader}>
-        <Controls
-          onNextClick={this.handleIncrement}
-          onPreviousClick={this.handleDecrement}
-          enableNext={enableNext}
-          enablePrevious={enablePrevious}
-        />
-        <Counter
-          currentPublicationNumber={currentPublicationNumber}
-          publicationsLength={publicationsLength}
-        />
-        <Publication header={publicationHeader} text={publicationText} />
-      </div>
+      publications.length > 0 && (
+        <div className={styles.reader}>
+          <Publication header={publicationHeader} text={publicationText} />
+          <Controls
+            onNextClick={this.handleIncrement}
+            onPreviousClick={this.handleDecrement}
+            enableNext={enableNext}
+            enablePrevious={enablePrevious}
+          />
+          <Counter
+            currentPublicationNumber={currentPublicationNumber}
+            publicationsLength={publicationsLength}
+          />
+        </div>
+      )
     );
   }
 }
