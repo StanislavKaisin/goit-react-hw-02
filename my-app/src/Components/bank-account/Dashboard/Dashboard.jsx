@@ -1,30 +1,13 @@
 /* eslint-disable consistent-return */
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
 import uuidv4 from 'uuid';
 import Controls from '../Controls/Controls';
 import Balance from '../Balance/Balance';
 import TransactionHistory from '../TransactionHistory/TransactionHistory';
 
-import './Dashboard.css';
-
-// console.log('uuidv4()= ', uuidv4());
-
-// const INITIALSTATE = {
-//   history: [],
-//   balance: 0,
-//   deposit: 0,
-//   witdraw: 0,
-//   inputValue: 0,
-//   isDepositEnable: true,
-//   isWithdrawEnable: true,
-// };
+import styles from './Dashboard.module.css';
 
 export default class Dashboard extends Component {
-  // static propTypes = {
-  //   prop: PropTypes,
-  // };
-
   state = {
     history: [],
     totalDeposit: 0,
@@ -34,8 +17,6 @@ export default class Dashboard extends Component {
     isDepositEnable: true,
     isWithdrawEnable: true,
   };
-
-  // create new operation function
 
   createNewOperation = typeOfOperation => {
     const dateOfOperation = new Date().toLocaleString();
@@ -47,46 +28,22 @@ export default class Dashboard extends Component {
     };
   };
 
-  // stopOperationOnZeroInput=()=>{
-  //   if (this.state.inputValue===0) {
-  //     alert('Введите сумму для проведения операции!');
-  //     this.clearInput();
-  //     return;
-  //    }
-  // }
-
   handleDeposit = () => {
-    // console.log('Date.prototype.toLocaleString()= ', new Date().toLocaleString());
-
-    // console.log('dateOfOperation= ', dateOfOperation);
-    // console.log('this.state.inputValue= ', this.state.inputValue);
-    /*
-    const operation = {
-      id:  uuidv4(),
-      type: 'Deposit',
-      amount: this.state.inputValue,
-      date: dateOfOperation,
-    }
-    */
     const { inputValue } = this.state;
     if (inputValue === 0) {
       alert('Введите сумму для проведения операции!');
       this.clearInput();
       return;
     }
-    const operation = this.createNewOperation('Deposit');
-    // console.log('operation= ', operation);
-    //
-    this.setState(prevState => {
-      // console.log('prevState= ', prevState);
 
+    const operation = this.createNewOperation('Deposit');
+
+    this.setState(prevState => {
       return {
         history: [operation, ...prevState.history],
         totalDeposit: prevState.totalDeposit + inputValue,
         balance: prevState.balance + inputValue,
       };
-      // console.log('this.state= ', this.state);
-      // console.log('this.state.history= ', this.state.history);
     });
 
     this.clearInput();
@@ -104,7 +61,7 @@ export default class Dashboard extends Component {
       this.clearInput();
       return;
     }
-    // console.log('handleWithdraw= ');
+
     const operation = this.createNewOperation('Withdraw');
 
     this.setState(prevState => {
@@ -113,17 +70,12 @@ export default class Dashboard extends Component {
         totalWithdraw: prevState.totalWithdraw + inputValue,
         balance: prevState.balance + inputValue,
       };
-      // console.log('this.state= ', this.state);
-      // console.log('this.state.history= ', this.state.history);
     });
     this.clearInput();
   };
 
   handleInputChange = e => {
     const { value } = e.target;
-
-    // console.log('value= ', value);
-    // const { inputValue } = this.state;
 
     this.setState({
       inputValue: Number(value),
@@ -141,7 +93,6 @@ export default class Dashboard extends Component {
   };
 
   render() {
-    // console.log('this= ', this);
     const {
       inputValue,
       totalDeposit,
@@ -151,11 +102,9 @@ export default class Dashboard extends Component {
       isWithdrawEnable,
       history,
     } = this.state;
-    // console.log('totalDeposit= ', typeof totalDeposit);
-    // console.log('totalWithdraw= ', typeof totalWithdraw);
-    // console.log('balance= ', balance);
+
     return (
-      <div className="dashboard">
+      <div className={styles.dashboard}>
         <Controls
           onDeposit={this.handleDeposit}
           onWithdraw={this.handleWithdraw}

@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './TransactionHistory.css';
 
+import formatter from '../formatter';
+
 const TransactionHistory = ({ transactionHistory }) => {
   return (
     transactionHistory.length > 0 && (
@@ -18,7 +20,7 @@ const TransactionHistory = ({ transactionHistory }) => {
           {transactionHistory.map(operation => (
             <tr key={operation.id}>
               <td>{operation.type}</td>
-              <td>{operation.amount}$</td>
+              <td>{formatter.format(operation.amount)}</td>
               <td>{operation.date}</td>
             </tr>
           ))}

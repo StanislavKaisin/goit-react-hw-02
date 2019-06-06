@@ -2,14 +2,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import styles from './Balance.module.css';
+
+import formatter from '../formatter';
+
 const Balance = ({ balance, deposit, witdraw }) => {
   return (
-    <section className="balance">
+    <section className={styles.balance}>
       <span>⬆️</span>
-      <span>{deposit}$</span>
+      <span>{formatter.format(deposit)}</span>
       <span>⬇️</span>
-      <span>{witdraw}$</span>
-      <span>Balance: {balance}$</span>
+      <span>{formatter.format(witdraw)}</span>
+      <span>Balance: {formatter.format(balance)}</span>
     </section>
   );
 };

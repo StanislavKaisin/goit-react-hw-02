@@ -10,15 +10,19 @@ const Controls = ({
   isDepositEnable,
   isWithdrawEnable,
 }) => {
-  // console.log('isWithdrawEnable=', isWithdrawEnable);
   return (
     <section className={styles.controls}>
-      <input type="number" onChange={onInputChange} value={inputValue} />
+      <input
+        type="number"
+        onChange={onInputChange}
+        value={inputValue}
+        className={styles.input}
+      />
       <button
         onClick={onDeposit}
         type="button"
         disabled={!isDepositEnable}
-        className={styles.button}
+        className={isDepositEnable ? styles.button : styles.buttonDisabled}
       >
         Deposit
       </button>
@@ -26,7 +30,7 @@ const Controls = ({
         onClick={onWithdraw}
         type="button"
         disabled={!isWithdrawEnable}
-        className={styles.button}
+        className={isWithdrawEnable ? styles.button : styles.buttonDisabled}
       >
         Withdraw
       </button>
