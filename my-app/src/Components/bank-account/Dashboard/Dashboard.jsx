@@ -13,7 +13,7 @@ export default class Dashboard extends Component {
     totalDeposit: 0,
     totalWithdraw: 0,
     balance: 0,
-    inputValue: 0,
+    inputValue: '',
     isDepositEnable: true,
     isWithdrawEnable: true,
   };
@@ -30,7 +30,7 @@ export default class Dashboard extends Component {
 
   handleDeposit = () => {
     const { inputValue } = this.state;
-    if (inputValue === 0) {
+    if (!inputValue) {
       alert('Введите сумму для проведения операции!');
       this.clearInput();
       return;
@@ -50,12 +50,14 @@ export default class Dashboard extends Component {
   };
 
   handleWithdraw = () => {
-    if (this.state.inputValue === 0) {
+    const { inputValue, balance } = this.state;
+
+    if (!inputValue) {
       alert('Введите сумму для проведения операции!');
       this.clearInput();
       return;
     }
-    const { inputValue, balance } = this.state;
+
     if (Math.abs(inputValue) > balance) {
       alert('На счету недостаточно средств для проведения операции!');
       this.clearInput();
@@ -86,7 +88,7 @@ export default class Dashboard extends Component {
 
   clearInput = () => {
     this.setState({
-      inputValue: 0,
+      inputValue: '',
       isDepositEnable: true,
       isWithdrawEnable: true,
     });

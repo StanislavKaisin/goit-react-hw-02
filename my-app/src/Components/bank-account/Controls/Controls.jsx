@@ -17,23 +17,26 @@ const Controls = ({
         onChange={onInputChange}
         value={inputValue}
         className={styles.input}
+        placeholder="Вввдите положительное число чтобы добавить деньги на счет и отрицательное для снятия"
       />
-      <button
-        onClick={onDeposit}
-        type="button"
-        disabled={!isDepositEnable}
-        className={isDepositEnable ? styles.button : styles.buttonDisabled}
-      >
-        Deposit
-      </button>
-      <button
-        onClick={onWithdraw}
-        type="button"
-        disabled={!isWithdrawEnable}
-        className={isWithdrawEnable ? styles.button : styles.buttonDisabled}
-      >
-        Withdraw
-      </button>
+      <div className="">
+        <button
+          onClick={onDeposit}
+          type="button"
+          disabled={!isDepositEnable}
+          className={isDepositEnable ? styles.button : styles.buttonDisabled}
+        >
+          Deposit
+        </button>
+        <button
+          onClick={onWithdraw}
+          type="button"
+          disabled={!isWithdrawEnable}
+          className={isWithdrawEnable ? styles.button : styles.buttonDisabled}
+        >
+          Withdraw
+        </button>
+      </div>
     </section>
   );
 };
@@ -42,7 +45,8 @@ Controls.propTypes = {
   onDeposit: PropTypes.func.isRequired,
   onWithdraw: PropTypes.func.isRequired,
   onInputChange: PropTypes.func.isRequired,
-  inputValue: PropTypes.number.isRequired,
+  inputValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    .isRequired,
   isDepositEnable: PropTypes.bool.isRequired,
   isWithdrawEnable: PropTypes.bool.isRequired,
 };
