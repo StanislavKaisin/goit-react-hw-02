@@ -7,7 +7,6 @@ const Controls = ({
   onWithdraw,
   onInputChange,
   inputValue,
-  isDepositEnable,
   isWithdrawEnable,
 }) => {
   return (
@@ -17,15 +16,12 @@ const Controls = ({
         onChange={onInputChange}
         value={inputValue}
         className={styles.input}
-        placeholder="Вввдите положительное число чтобы добавить деньги на счет и отрицательное для снятия"
+        placeholder="Вввдите сумму"
+        min="0"
+        step="0.01"
       />
       <div className="">
-        <button
-          onClick={onDeposit}
-          type="button"
-          disabled={!isDepositEnable}
-          className={isDepositEnable ? styles.button : styles.buttonDisabled}
-        >
+        <button onClick={onDeposit} type="button" className={styles.button}>
           Deposit
         </button>
         <button
@@ -47,7 +43,7 @@ Controls.propTypes = {
   onInputChange: PropTypes.func.isRequired,
   inputValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     .isRequired,
-  isDepositEnable: PropTypes.bool.isRequired,
+  // isDepositEnable: PropTypes.bool.isRequired,
   isWithdrawEnable: PropTypes.bool.isRequired,
 };
 

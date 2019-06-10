@@ -14,7 +14,6 @@ export default class Dashboard extends Component {
     totalWithdraw: 0,
     balance: 0,
     inputValue: '',
-    isDepositEnable: true,
     isWithdrawEnable: true,
   };
 
@@ -70,7 +69,7 @@ export default class Dashboard extends Component {
       return {
         history: [operation, ...prevState.history],
         totalWithdraw: prevState.totalWithdraw + inputValue,
-        balance: prevState.balance + inputValue,
+        balance: prevState.balance - inputValue,
       };
     });
     this.clearInput();
@@ -78,18 +77,19 @@ export default class Dashboard extends Component {
 
   handleInputChange = e => {
     const { value } = e.target;
-
+    const { balance } = this.state;
+    const roundedValue = Math.round(value * 100) / 100;
+    const transformedValue = Math.abs(roundedValue);
     this.setState({
-      inputValue: Number(value),
-      isDepositEnable: !(Number(value) < 0),
-      isWithdrawEnable: !(Number(value) > 0),
+      inputValue:
+        Number(transformedValue) === 0 ? '' : Number(transformedValue),
+      isWithdrawEnable: !(transformedValue > balance),
     });
   };
 
   clearInput = () => {
     this.setState({
       inputValue: '',
-      isDepositEnable: true,
       isWithdrawEnable: true,
     });
   };
@@ -100,7 +100,6 @@ export default class Dashboard extends Component {
       totalDeposit,
       totalWithdraw,
       balance,
-      isDepositEnable,
       isWithdrawEnable,
       history,
     } = this.state;
@@ -112,7 +111,6 @@ export default class Dashboard extends Component {
           onWithdraw={this.handleWithdraw}
           onInputChange={this.handleInputChange}
           inputValue={inputValue}
-          isDepositEnable={isDepositEnable}
           isWithdrawEnable={isWithdrawEnable}
         />
         <Balance
