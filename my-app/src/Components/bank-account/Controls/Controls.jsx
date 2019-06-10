@@ -43,7 +43,6 @@ Controls.propTypes = {
   onInputChange: PropTypes.func.isRequired,
   inputValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     .isRequired,
-  // isDepositEnable: PropTypes.bool.isRequired,
   isWithdrawEnable: PropTypes.bool.isRequired,
 };
 
