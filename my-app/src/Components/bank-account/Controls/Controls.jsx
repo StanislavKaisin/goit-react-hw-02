@@ -16,7 +16,7 @@ const Controls = ({
         onChange={onInputChange}
         value={inputValue}
         className={styles.input}
-        placeholder="Вввдите сумму"
+        placeholder="Введите сумму"
         min="0"
         step="0.01"
       />
